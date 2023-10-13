@@ -6,45 +6,42 @@ pilot-ios-spm
 
 ## 1. Add a package dependency
 
-- Select `File` -> `Swift Package` -> `Add Package Dependency`
+### 1.1. Using Swift Package Manager
+
+- Select `File` → `Swift Package` → `Add Package Dependency`
 - Enter package dependency url: `https://github.com/piltekvn/pilot-ios-spm.git`
-- Select `Next` -> Branch `main` -> `Next`
+- Select `Next` → Branch `main` → `Next`
+
+### 1.2. Using CocoaPods
+
+#### 1.2.1. Add library in Podfile:
+
+`pod 'pilot-ios-sdk', :git => 'https://github.com/piltekvn/pilot-ios-sdk.git'`
+
+#### 1.2.2. Create Objective-C bridging header to expose file to Swift [See detail](https://developer.apple.com/documentation/swift/importing-objective-c-into-swift)
+
+**Example:**
+
+- Select `New file` → `Header file` → Enter `OTT-Bridging-Header.h`
+- In the `Build Settings` → search for `Objective-C Bridging Header` → Enter path to `OTT-Bridging-Header.h` just created above
+- In the `OTT-Bridging-Header.h` enter `#import <pilot-ios-sdk/OTT.h>`
 
 ## 2. Project configuration
 
-- **Add library** - libc++.tbd - AVFoundation.framework
-- In **Build Settings**, set **Enable Bitcode = NO**
-- **Enable protocol calling HTTP và local resource**
-
-In Xcode's Project Navigator, open the Info.plist file in source edit mode. And add one of the values below.
-
-```
-<key>NSAppTransportSecurity</key>
-<dict>
-    <key>NSAllowsArbitraryLoads</key>
-    <true/>
-</dict>
-```
-
-OR
-
-```
-<key>NSAppTransportSecurity</key>
-<dict>
-    <key>NSAllowsLocalNetworking</key>
-    <true/>
-</dict>
-```
+- **Add library**
+  - `libc++.tbd`
+  - `AVFoundation.framework`
+- In the **Build Settings**, set **Enable Bitcode = NO**
 
 ## 3. Initialize pilot in Project
 
 ```swift
-// Import pilot SDK
+// If you use CocoaPods, remove the line below
 import PilotFramework
 ... // Other sources
 override func viewDidLoad() {
-		super.viewDidLoad()
-		OTT.getInstance().initialize("PARTNER_ID")
+	super.viewDidLoad()
+	OTT.getInstance().initialize("PARTNER_ID")
 }
 ```
 
