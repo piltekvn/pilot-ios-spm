@@ -10,7 +10,9 @@ pilot-ios-spm
 
 - Select `File` → `Swift Package` → `Add Package Dependency`
 - Enter package dependency url: `https://github.com/piltekvn/pilot-ios-spm.git`
-- Select `Next` → Branch `main` → `Next`
+- Select `Next`
+- Select `Version` -> Select `Exact` -> Input `X.X.X` (version you want to install, example 1.0.1)
+- Select `Done`
 
 ### 1.2. Using CocoaPods
 
@@ -54,7 +56,7 @@ including:
 
 ```swift
 // Original media link
-let *originUrl = @"";
+let originUrl = ""
 let pilotUrl = OTT.getInstance().generate(originUrl, configKey: "PROPERTY_ID")
 
 // Transfer Pilot File to AvPlayer
